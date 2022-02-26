@@ -1,14 +1,17 @@
-#include"Texture.h"
-#include"Renderer.h"
-#include"stb_image/stb_image.h"
+#include "Texture.h"
+#include "Renderer.h"
+#include <iostream>
+#include "./vendor/stb_image/stb_image.h"
 
 Texture::Texture(std::string path)
-	: m_RendererID(0), m_LocalBuffer{ nullptr }, m_Width(0), m_Heigth(0), m_BPP(0)
+	: m_RendererID(0), m_LocalBuffer{nullptr}, m_Width(0), m_Heigth(0), m_BPP(0)
 {
 	stbi_set_flip_vertically_on_load(1);
-
 	m_LocalBuffer = stbi_load(path.c_str(), &m_Width, &m_Heigth, &m_BPP, 4);
-
+	if (!m_LocalBuffer)
+	{
+		std::cout << "You got screwed Xd" << std::endl;
+	};
 	glCall(glGenTextures(1, &m_RendererID));
 	glCall(glBindTexture(GL_TEXTURE_2D, m_RendererID));
 
@@ -27,7 +30,6 @@ Texture::Texture(std::string path)
 Texture::~Texture()
 {
 	glCall(glDeleteTextures(1, &m_RendererID));
-
 }
 
 void Texture::Bind(unsigned int slot) const

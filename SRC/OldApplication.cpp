@@ -1,17 +1,17 @@
-#include <GL/glew.h> 
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include<iostream>
-#include<fstream>
-#include<string>
-#include<sstream>
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <sstream>
 
-#include"Renderer.h"
+#include "Renderer.h"
 
 #include "VertexBuffer.h"
-#include"IndexBuffer.h"
+#include "IndexBuffer.h"
 #include "VertexBufferLayout.h"
-#include"VertexArray.h"
+#include "VertexArray.h"
 
 #include "Shader.h"
 
@@ -19,13 +19,13 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
-#include"imgui/imgui.h"
-#include"imgui/imgui_impl_glfw_gl3.h"
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_glfw_gl3.h"
 
 int main(void)
 {
 	glewInit();
-	GLFWwindow* window;
+	GLFWwindow *window;
 
 	/* Initialize the library */
 	if (!glfwInit())
@@ -51,19 +51,18 @@ int main(void)
 	if (glewInit() != GLEW_OK)
 		std::cout << "Error!!" << std::endl;
 	{
-		//position of the triangle 
+		// position of the triangle
 		float position[] = {
-			-50.0f,  -50.0f, 0.0f, 0.0f, //0
-			 50.0f,  -50.0f, 1.0f, 0.0f, //1
-			 50.0f,   50.0f, 1.0f, 1.0f, //2
-			-50.0f,   50.0f, 0.0f, 1.0f  //3
+			-50.0f, -50.0f, 0.0f, 0.0f, // 0
+			50.0f, -50.0f, 1.0f, 0.0f,	// 1
+			50.0f, 50.0f, 1.0f, 1.0f,	// 2
+			-50.0f, 50.0f, 0.0f, 1.0f	// 3
 		};
 
-		//repeated indecies of the square (optimized method)
+		// repeated indecies of the square (optimized method)
 		unsigned int indecies[] = {
-			0,1,2,
-			2,3,0
-		};
+			0, 1, 2,
+			2, 3, 0};
 		glCall(glEnable(GL_BLEND));
 		glCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
@@ -88,12 +87,10 @@ int main(void)
 		Texture texture("res/textures/h.png");
 		texture.Bind();
 
-
 		glm::mat4 proj = glm::ortho<float>(0.0, 960.0, 0.0, 540.0, -1.0, 1.0);
 		glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 
-
-		//shader.SetUniform4f("u_color", 0.1f, 0.5f, 0.8f, 1.0f);
+		// shader.SetUniform4f("u_color", 0.1f, 0.5f, 0.8f, 1.0f);
 
 		shader.SetUniformi("u_Texture", 0);
 
@@ -130,13 +127,12 @@ int main(void)
 				Renderer.Draw(va, ib, shader);
 			}
 
-			//Make a simple animation with the color
+			// Make a simple animation with the color
 			if (r > 1.0f)
 				increment = -0.05f;
 			else if (r < 0.0f)
 				increment = 0.05f;
 			r += increment;
-
 
 			{
 				ImGui::Text("This is a simple GUI");
