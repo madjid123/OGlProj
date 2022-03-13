@@ -7,7 +7,6 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-// #include "../vendor/imgui/imgui.h"
 #include <imgui/imgui.h>
 #include <imgui/imgui_impl_glfw_gl3.h>
 #include "../Texture.h"
@@ -18,14 +17,14 @@ namespace test
 	TestTexture2D::TestTexture2D()
 		: m_translationA{200, 200, 0},
 		  m_translationB{400, 200, 0},
-		  m_proj{glm::ortho<float>(0.0, 960.0, 0.0, 540.0, -1.0, 1.0)},
+		  m_proj{glm::ortho<float>(0.0, 960.0, 0.0, 560.0, -1.0, 1.0)},
 		  m_view{glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f))}
 	{
 		float position[] = {
-			-50.0f, -50.0f, 0.0f, 0.0f, // 0
-			50.0f, -50.0f, 1.0f, 0.0f,	// 1
-			50.0f, 50.0f, 1.0f, 1.0f,	// 2
-			-50.0f, 50.0f, 0.0f, 1.0f	// 3
+			-100.0f, -100.0f, 0.0f, 0.0f, // 0
+			100.0f, -100.0f, 1.0f, 0.0f,  // 1
+			100.0f, 100.0f, 1.0f, 1.0f,	  // 2
+			-100.0f, 100.0f, 0.0f, 1.0f	  // 3
 		};
 
 		// repeated indecies of the square (optimized method)
@@ -49,7 +48,7 @@ namespace test
 
 		m_shader->Bind();
 
-		m_Texture = std::make_unique<Texture>("/home/dex/Documents/projects/cpp/OGlProj/res/textures/x.png");
+		m_Texture = std::make_unique<Texture>("/home/dex/Documents/projects/cpp/OGlProj/res/textures/h.jpg");
 		m_Texture->Bind();
 		m_shader->SetUniformi("u_Texture", 0);
 	}
@@ -64,7 +63,7 @@ namespace test
 
 	void TestTexture2D::OnRender()
 	{
-		glCall(glClearColor(0.4f, 0.4f, 0.0f, 1.0f));
+		glCall(glClearColor(0.1f, 0.1f, 0.1f, 1.0f));
 		glCall(glClear(GL_COLOR_BUFFER_BIT));
 
 		Renderer Renderer;

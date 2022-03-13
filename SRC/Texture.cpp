@@ -14,7 +14,6 @@ Texture::Texture(std::string path)
 	};
 	glCall(glGenTextures(1, &m_RendererID));
 	glCall(glBindTexture(GL_TEXTURE_2D, m_RendererID));
-
 	glCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
 	glCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
 	glCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));

@@ -5,9 +5,16 @@
 #include "IndexBuffer.h"
 #include "VertexArray.h"
 #include "Shader.h"
+#ifdef _MSC_VER
+#define ERROR_TRAP_FUNCTION __debugbreak
+#else
+#define ERROR_TRAP_FUNCTION __builtin_trap
+#endif
+
 #define ASSERT(x) \
        if (!(x))  \
-              __builtin_trap();
+                ERROR_TRAP_FUNCTION();
+//              __builtin_trap();
 //#define ASSERT(x) if (!(x)) __debugbreak();
 #define glCall(x)      \
        GlClearError(); \

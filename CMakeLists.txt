@@ -509,7 +509,8 @@ set(Header_Files
     "SRC/VertexArray.h"
     "SRC/VertexBuffer.h"
     "SRC/VertexBufferLayout.h"
-)
+        "SRC/Model.h"
+        "SRC/Mesh.h")
 source_group("Header Files" FILES ${Header_Files})
 
 set(Source_Files
@@ -529,14 +530,15 @@ set(Source_Files
     "SRC/vendor/stb_image/stb_image.cpp"
     "SRC/VertexArray.cpp"
     "SRC/VertexBuffer.cpp"
-)
+        "SRC/Model.cpp"
+        "SRC/Mesh.cpp")
 source_group("Source Files" FILES ${Source_Files})
 
 set(ALL_FILES
     ${no_group_source_files}
     ${Header_Files}
     ${Source_Files}
-)
+        SRC/tests/TestModel.cpp SRC/tests/TestModel.h)
 
 ################################################################################
 # Target
@@ -650,13 +652,23 @@ endif()
 # Dependencies
 ################################################################################
 if("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x64")
+    if(WIN32)
+    set(ADDITIONAL_LIBRARY_DEPENDENCIES
+         "glfw3;"
+        "opengl32;"
+        "assimp;"
+        # "m"
+    )
+    elseif(UNIX)
     set(ADDITIONAL_LIBRARY_DEPENDENCIES
          "GLEW;"
         "GL;"
         "GLU;"
         "glfw3;"
         "m;"
+        "assimp;"
     )
+    endif()
 elseif("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x86")
     set(ADDITIONAL_LIBRARY_DEPENDENCIES
         "GLEW;"

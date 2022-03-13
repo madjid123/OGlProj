@@ -48,3 +48,5 @@
 **/CMakeScripts
 **/compile_commands.json
 /build
+/.ccls-cache
+/.idea
